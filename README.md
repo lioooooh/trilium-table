@@ -18,3 +18,4 @@ https://github.com/antoniotejada/Trilium-TocWidget
 ![image1](https://user-images.githubusercontent.com/19770171/167236711-c029e436-c6e5-4a92-9661-07d1e8340c8c.png)
 ![image2](https://user-images.githubusercontent.com/19770171/167236717-a81293ba-998d-4e30-bbb6-53d9910d1cdb.png)
 ![image3](https://user-images.githubusercontent.com/19770171/167236720-eaf61a37-9982-48cd-858e-723e745d2f37.png)
+![image3](https://user-images.githubusercontent.com/19770171/167236753-f0678c08-52ee-47fe-a567-22a15d8b91db.png)
