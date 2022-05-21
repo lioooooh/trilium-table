@@ -4,8 +4,8 @@
  * 基于 https://github.com/zadam/trilium/discussions/2799
  * 参考https://github.com/antoniotejada/Trilium-TocWidget
  
- *我仅对样式做了修改，使之看起来更优雅
- 
+ *我对样式做了修改，可能会看起来更优雅
+ *我调整了正则表达式的匹配，可以让从其他文档复制过来的有格式的标题文档，也能被获取到
  */
 
 
@@ -214,11 +214,17 @@ class TocWidget extends api.NoteContextAwareWidget {
      */
     getToc(html) {
         dbg("getToc");
-        
+        //html参数是接口返回的整个页面的内容
+        //console.log(html);
+        console.log("----------------------------------");
+        //这里用htmltext来转换一下，把各种style，还有h标签下的span都替换成空
+        var htmltext=html.replace(/\sstyle=".*?"|<a.*?>|<\/a.*?>|<div.*?>|<\/div.*?>|<span.*?>|<\/span.*?>/ig,"")
+        //console.log(htmltext);
         // Regular expression for headings <h1>...</h1> using non-greedy
         // matching and backreferences
-        let reHeadingTags = /<h(\d+)>(.*?)<\/h\1>/g;
-
+         let reHeadingTags = /<h(\d+)>(.*?)<\/h(\d+)>/g;
+        //上面的正则表达式用于匹配出所有的h标签
+        //
         // Use jquery to build the table rather than html text, since it makes
         // it easier to set the onclick event that will be executed with the
         // right captured callback context
@@ -228,7 +234,8 @@ class TocWidget extends api.NoteContextAwareWidget {
         // Note heading 2 is the first level Trilium makes available to the note
         let curLevel = 2;
         let $ols = [$toc];
-        for (let m = null, headingIndex = 0; ((m = reHeadingTags.exec(html)) !== null);
+       
+        for (let m = null, headingIndex = 0; ((m = reHeadingTags.exec(htmltext)) !== null);
             ++headingIndex) {
             //
             // Nest/unnest whatever necessary number of ordered lists
